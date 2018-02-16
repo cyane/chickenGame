@@ -1,0 +1,140 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Juego</title>
+    <style type="text/css">
+        canvas{
+        border:5px solid orange;
+        }
+        html,body { 
+      overflow:hidden; 
+        }
+    </style>
+</head>
+
+<body >
+   <canvas id="canvas"> </canvas>
+</body>
+<script >
+// creando el canvas
+var canvas = document.getElementById("canvas");
+var ctx = canvas.getContext("2d");
+
+    document.body.appendChild(canvas);
+
+var imagenPersonaje = new Image();
+    imagenPersonaje.src = "https://cdn.glitch.com/0c5fd143-6bda-4c72-915d-a4360fa2a11d%2Fpj.png?1518731951500";
+var imagenGallina = new Image();
+    imagenGallina.src = "https://cdn.glitch.com/0c5fd143-6bda-4c72-915d-a4360fa2a11d%2Fgallina.png?1518731951387";
+    //objeto
+var personaje = {
+    velocidad: 3
+};
+var gallina = {};
+var contador = 0;
+// control del personaje al puplsar y despulsar la tecla
+var keysDown = {};
+addEventListener("keydown", function (e) {
+    keysDown[e.keyCode] = true;
+}, false);
+addEventListener("keyup", function (e) {
+	delete keysDown[e.keyCode];
+}, false);
+// poner cood pj en juego
+    personajex = canvas.width / 2;
+	personajey = canvas.height / 2;
+var resetear = function () {
+	// poner random a la gallina por el mapa al morir
+	gallinax = Math.random() * (canvas.width -35);
+	gallinay = Math.random() * (canvas.height - 35);
+};
+
+// movimiento
+var actualizar = function () {
+    canvas.style.width = window.innerWidth-30 + "px";
+    canvas.style.height = window.innerHeight-30 + "px";
+	if (38 in keysDown) { 
+		personajey -= personaje.velocidad ;
+	}
+	if (40 in keysDown) { 
+		personajey += personaje.velocidad ;
+	}
+	if (37 in keysDown) { 
+		personajex -= personaje.velocidad ;
+	}
+	if (39 in keysDown) { 
+		personajex += personaje.velocidad ;
+	}
+
+	//colision
+	if (
+		personajex <= (gallinax + 20)
+		&& gallinax <= (personajex + 20)
+		&& personajey <= (gallinay + 20)
+		&& gallinay <= (personajey + 20)
+	) {
+		++contador;
+		resetear();
+	}
+};
+
+// pintar las gallinas
+var pintar = function () {
+	ctx.drawImage(imagenPersonaje, personajex, personajey);
+	ctx.drawImage(imagenGallina, gallinax, gallinay);
+    
+    
+	// pmarcador de puntuacion
+	ctx.fillStyle = "rgba(8, 8, 141, 0.97)";
+	ctx.textAlign = "left";
+    ctx.font = "18px Comic Sans MS";
+	ctx.textBaseline = "top";
+	ctx.fillText("Gallinas Atrapadas " + contador, canvas.width/2-70, 0);
+};		
+    
+    
+    var micanvas, ctx;
+    var tiempo = 0;
+    var stop;
+    var fondo = new Image();
+    fondo.src ='https://cdn.glitch.com/0c5fd143-6bda-4c72-915d-a4360fa2a11d%2Ffondo.png?1518731951745';
+    window.addEventListener('load',init);
+function init(){
+	micanvas = document.getElementById('canvas');
+	micanvas.width = 448;
+	micanvas.height = 298;
+	ctx = micanvas.getContext('2d');
+	comenzar();
+}
+function comenzar(){
+	clearTimeout(stop);
+	stop = setTimeout(comenzar,1); 
+	dibujar(ctx);
+}
+function detener(){
+	clearTimeout(stop);
+	}
+function dibujar(ctx){
+	ctx.clearRect(0,0,micanvas.width,micanvas.height);
+	ctx.drawImage(fondo,tiempo,0);		
+    ctx.drawImage(fondo,tiempo-448,0);	 
+	tiempo--;
+    if(tiempo<0){
+		tiempo = tiempo + 448;	
+    }
+}
+    
+var principal = function () {
+	actualizar(1 / 1000);
+	pintar();
+    //solicita que el navegador programe el repintado de la ventana para el próximo ciclo de animación          
+    // https://developer.mozilla.org/es/docs/Web/API/Window/requestAnimationFrame
+	requestAnimationFrame(principal);
+};
+
+resetear();
+principal();        
+  </script>
+</html>
