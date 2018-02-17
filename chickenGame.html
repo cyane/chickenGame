@@ -64,7 +64,7 @@ var gallina = {
 var gallinaEnemiga={
     velocidad:4
 };
-
+  
 var contador = 0;
 
   
@@ -83,6 +83,8 @@ var resetear = function () {
 	// poner random a la gallina por el mapa al morir
 	gallinax = Math.random() * (canvas.width -35);
 	gallinay = Math.random() * (canvas.height - 35);
+  gallinaEnemigax = Math.random() * (canvas.width -35);
+	gallinaEnemigay = Math.random() * (canvas.height - 35);
 };
 
 // movimiento
@@ -154,6 +156,13 @@ var actualizar = function () {
 	    personajey = canvas.height / 2;
       contador=0;
     }
+  }else if(
+		personajex <= (gallinaEnemigax + 20)
+		&& gallinaEnemigax <= (personajex + 20)
+		&& personajey <= (gallinaEnemigay + 20)
+		&& gallinaEnemigay <= (personajey + 20)
+	) {
+    personaje.vida-=20;
   }
   
      movimientoGallina()
@@ -163,6 +172,7 @@ var actualizar = function () {
 var pintar = function () {
 	context.drawImage(imagenPersonaje, personajex, personajey);
 	context.drawImage(imagenGallina, gallinax, gallinay);
+  context.drawImage(imagenEnemigo, gallinaEnemigax, gallinaEnemigay);
     
     
 	// pmarcador de puntuacion
