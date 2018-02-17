@@ -41,7 +41,7 @@ function checkCookie() {
   
 // creando el canvas
 var canvas = document.getElementById("canvas");
-var ctx = canvas.getContext("2d");
+var context = canvas.getContext("2d");
 
     document.body.appendChild(canvas);
 
@@ -122,6 +122,7 @@ var actualizar = function () {
       personaje.velocidad=3;
       personajex = canvas.width / 2;
 	    personajey = canvas.height / 2;
+      contador=0;
     }
   }
 };
@@ -152,21 +153,21 @@ function init(){
 	micanvas = document.getElementById('canvas');
 	micanvas.width = 448;
 	micanvas.height = 298;
-	ctx = micanvas.getContext('2d');
+	context = micanvas.getContext('2d');
 	comenzar();
 }
 function comenzar(){
 	clearTimeout(stop);
 	stop = setTimeout(comenzar,1); 
-	dibujar(ctx);
+	dibujar(context);
 }
 function detener(){
 	clearTimeout(stop);
 	}
-function dibujar(ctx){
-	ctx.clearRect(0,0,micanvas.width,micanvas.height);
-	ctx.drawImage(fondo,tiempo,0);		
-    ctx.drawImage(fondo,tiempo-448,0);	 
+function dibujar(context){
+	context.clearRect(0,0,micanvas.width,micanvas.height);
+	context.drawImage(fondo,tiempo,0);		
+    context.drawImage(fondo,tiempo-448,0);	 
 	tiempo--;
     if(tiempo<0){
 		tiempo = tiempo + 448;	
