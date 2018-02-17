@@ -109,7 +109,9 @@ var actualizar = function () {
     console.log("velocidad: "+personaje.velocidad);
     console.log(localStorage.getItem("maxG"));
 		resetear();
-	}
+	}else if(personajex >= canvas.width+20 ||personajex <= canvas.width-canvas.width-50 || personajey >= canvas.height){
+      console.log("lose");
+  }
 };
 
 // pintar las gallinas
