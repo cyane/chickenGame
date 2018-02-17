@@ -26,16 +26,15 @@ function setCookie(cname,cvalue) {
 
 function getCookie(cname) {
     var ca = document.cookie;
-    return ca.substring();
+    return ca.substring(7,ca.length);
 }
 
 function checkCookie() {
     var maximo = getCookie("maximo");
-    alert(maximo);
     if (maximo != "" && maximo != null) {
-        alert(" max: "+maximo);
+        alert("tu maximo es de: "+maximo);
     } else {
-        setCookie("maximo", 1);
+        setCookie("maximo", 0);
     }
 }
   checkCookie();
@@ -77,7 +76,7 @@ var resetear = function () {
 };
 
 // movimiento
-var actualizar = function () {
+var actualizar = function () { 
     canvas.style.width = window.innerWidth-30 + "px";
     canvas.style.height = window.innerHeight-30 + "px";
 	if (38 in keysDown) { 
@@ -101,7 +100,9 @@ var actualizar = function () {
 		&& gallinay <= (personajey + 20)
 	) {
 		++contador;
-    alert(getCookie("maximo"));
+    if(contador>getCookie("maximo")){
+      setCookie("maximo", contador);
+    }
 		resetear();
 	}
 };
