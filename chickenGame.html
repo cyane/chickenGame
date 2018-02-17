@@ -18,6 +18,8 @@
    <canvas id="canvas"> </canvas>
 </body>
 <script >
+  
+  
 // creando el canvas
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
@@ -33,6 +35,11 @@ var personaje = {
     velocidad: 3
 };
 var gallina = {};
+  
+var contadorMax = 0;
+localStorage.setItem(contadorMax, 0);
+  
+  
 var contador = 0;
 // control del personaje al puplsar y despulsar la tecla
 var keysDown = {};
@@ -76,8 +83,8 @@ var actualizar = function () {
 		&& gallinay <= (personajey + 20)
 	) {
 		++contador;
-    if(contador>contadorMax){
-     contadorMax=contador; 
+    if(contador>localStorage.getItem(contadorMax)){
+     localStorage.setItem(contadorMax, contador); 
     }
 		resetear();
 	}
@@ -94,8 +101,7 @@ var pintar = function () {
 	ctx.textAlign = "left";
     ctx.font = "18px Comic Sans MS";
 	ctx.textBaseline = "top";
-	ctx.fillText("Gallinas Atrapadas " + contador, canvas.width/2-70, 0);
-  ctx.fillText("record" + contadorMax, canvas.width/2-50, 0);
+	ctx.fillText("Gallinas Atrapadas " + contador+" Max:"+localStorage.getItem(contadorMax), canvas.width/2-150, 0);
 };		
     
     
