@@ -20,9 +20,8 @@
 <script >
   
   //cookies
-  function setCookie(cname, cmax) {
-    var d = new Date();
-    document.cookie = cname + "=" + cmax + ";";
+function setCookie(cname, cvalue) {
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
 
 function getCookie(cname) {
@@ -42,9 +41,8 @@ function getCookie(cname) {
 
 function checkCookie() {
     var user = getCookie("username");
-    var max = getCookie("");
     if (user != "") {
-        alert("Welcome again " + user+ "tu maximo fue de: "+);
+        alert("Welcome again " + user);
     } else {
         user = prompt("Please enter your name:", "");
         if (user != "" && user != null) {
