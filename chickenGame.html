@@ -56,7 +56,9 @@ var personaje = {
     velocidad: velocidadInicial,
     vida:vidaInicial
 };
-var gallina = {};
+var gallina = {
+    velocidad=1
+};
 
 var contador = 0;
 
@@ -84,17 +86,44 @@ var actualizar = function () {
     canvas.style.height = window.innerHeight-30 + "px";
 	if (38 in keysDown) { 
 		personajey -= personaje.velocidad ;
+    movimientoGallina()
 	}
 	if (40 in keysDown) { 
 		personajey += personaje.velocidad ;
+    movimientoGallina()
 	}
 	if (37 in keysDown) { 
 		personajex -= personaje.velocidad ;
+     movimientoGallina()
 	}
 	if (39 in keysDown) { 
 		personajex += personaje.velocidad ;
+     movimientoGallina()
 	}
 
+  
+  function movimientoGallina(){
+  switch(Math.floor(5 * Math.random())) {
+    case 1:
+        console.log("1");
+      gallinax-=
+        break;
+    case 2:
+        console.log("2");
+      gallinax+=
+        break;
+    case 3:
+        console.log("3");
+      gallinay-
+        break;
+    case 4:
+        console.log("4");
+      gallinay
+        break;
+    default:
+        break;
+}
+  }
 	//colision
 	if (
 		personajex <= (gallinax + 20)
