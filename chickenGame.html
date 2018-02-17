@@ -20,33 +20,21 @@
 <script >
   
   //cookies
-function setCookie(cname, cvalue,cmax) {
-    document.cookie = cname + "=" + cvalue + ";" + cmax+ "max";
+function setCookie(cvalue) {
+    document.cookie = cvalue;
 }
 
-function getCookie(cname) {
-    var name = cname + "=";
-    var ca = document.cookie.split(';');
-    for(var i = 0; i < ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-        }
-    }
-    return "";
+function getCookie() {
+ return valueOf.document.cookie;
 }
 
 function checkCookie() {
-    var user = getCookie("username");
-    if (user != "") {
-        alert("Welcome " + user);
+    var maximo = getCookie();
+    if (maximo != "") {
+        alert("max " + maximo);
     } else {
-        user = prompt("nickname:", "");
-        if (user != "" && user != null) {
-            setCookie("username", user,0);
+        if (maximo != "" && maximo != null) {
+            setCookie(0);
         }
     }
 }
