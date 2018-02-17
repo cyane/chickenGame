@@ -25,23 +25,17 @@ function setCookie(cname,cvalue) {
 }
 
 function getCookie(cname) {
-    var name = cname + "=";
-    var ca = document.cookie.split(';');
-     if(ca[1]!=""){
-        return ca[1];
-    }
-    return "";
+    var ca = document.cookie;
+    return ca.substring();
 }
 
 function checkCookie() {
     var maximo = getCookie("maximo");
-    if (maximo != "") {
-        alert(" max: "+max);
+    alert(maximo);
+    if (maximo != "" && maximo != null) {
+        alert(" max: "+maximo);
     } else {
-        maximo = prompt("Nickname:", "");
-        if (maximo != "" && maximo != null) {
-            setCookie("maximo", maximo);
-        }
+        setCookie("maximo", 1);
     }
 }
   checkCookie();
@@ -107,6 +101,7 @@ var actualizar = function () {
 		&& gallinay <= (personajey + 20)
 	) {
 		++contador;
+    alert(getCookie("maximo"));
 		resetear();
 	}
 };
