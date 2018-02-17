@@ -25,12 +25,13 @@ function setCookie(cvalue) {
 }
 
 function getCookie() {
- return valueOf.document.cookie;
+ return document.cookie.valueOf();
 }
 
 function checkCookie() {
     var maximo = getCookie();
     if (maximo != "") {
+        setCookie(0);
         alert("max " + maximo);
     } else {
         if (maximo != "" && maximo != null) {
