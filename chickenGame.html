@@ -50,8 +50,11 @@ var imagenPersonaje = new Image();
 var imagenGallina = new Image();
     imagenGallina.src = "https://cdn.glitch.com/0c5fd143-6bda-4c72-915d-a4360fa2a11d%2Fgallina.png?1518731951387";
     //objeto
+var vidaInicial=100;
+var velocidadInicial=3;
 var personaje = {
-    velocidad: 3
+    velocidad: velocidadInicial,
+    vida:vidaInicial
 };
 var gallina = {};
 
@@ -67,8 +70,8 @@ addEventListener("keyup", function (e) {
 	delete keysDown[e.keyCode];
 }, false);
 // poner cood pj en juego
-    personajex = canvas.width / 2;
-	personajey = canvas.height / 2;
+    personajex = canvas.width-100;
+	personajey = canvas.height-10;
 var resetear = function () {
 	// poner random a la gallina por el mapa al morir
 	gallinax = Math.random() * (canvas.width -35);
@@ -109,8 +112,15 @@ var actualizar = function () {
     console.log("velocidad: "+personaje.velocidad);
     console.log(localStorage.getItem("maxG"));
 		resetear();
-	}else if(personajex >= canvas.width+20 ||personajex <= canvas.width-canvas.width-50 || personajey >= canvas.height){
-      console.log("lose");
+	}else if(personajex >= canvas.width+20 ||personajex <= canvas.width-canvas.width-50 || personajey >= canvas.height+20 || personajey <= canvas.height-canvas.height-40){
+      personaje.vida--;
+    if(personaje.vida<0){
+      alert("you lose");
+      personaje.vida=100;
+      personaje.velocidad=3;
+      personajex = canvas.width / 2;
+	    personajey = canvas.height / 2;
+    }
   }
 };
 
@@ -126,7 +136,7 @@ var pintar = function () {
   ctx.font = "15px Comic Sans MS";
 	ctx.textBaseline = "top";
   let speed= (personaje.velocidad.valueOf());
-	ctx.fillText("Gallinas Atrapadas: " + contador + " | velocidad " + speed+" | personal: " + getCookie("maximo") + " global: " + localStorage.getItem("maxG"),canvas.width-canvas.width+1, 0);
+	ctx.fillText("Gallinas Atrapadas: " + contador + " | velocidad " + speed+" | personal: " + getCookie("maximo") +" vida:"+personaje.vida /*+ " global: " + localStorage.getItem("maxG")*/,canvas.width-canvas.width+1, 0);
 };		
     
     
