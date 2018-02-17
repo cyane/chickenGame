@@ -20,8 +20,8 @@
 <script >
   
   //cookies
-function setCookie(cname, cvalue) {
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+function setCookie(cname, cvalue,cmax) {
+    document.cookie = cname + "=" + cvalue + ";" + cmax+ "max";
 }
 
 function getCookie(cname) {
@@ -42,11 +42,11 @@ function getCookie(cname) {
 function checkCookie() {
     var user = getCookie("username");
     if (user != "") {
-        alert("Welcome again " + user);
+        alert("Welcome " + user);
     } else {
-        user = prompt("Please enter your name:", "");
+        user = prompt("nickname:", "");
         if (user != "" && user != null) {
-            setCookie("username", user);
+            setCookie("username", user,0);
         }
     }
 }
