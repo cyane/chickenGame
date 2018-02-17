@@ -102,9 +102,11 @@ var actualizar = function () {
 		++contador;
     if(contador>getCookie("maximo")){
       setCookie("maximo", contador);
+      console.log("nuevo maximo personal de "+contador);
+      localStorage.maximoGlobal=contador;
     }
-    personaje.velocidad+ 0,250;
-    echo(personaje.velocidad);
+    personaje.velocidad=personaje.velocidad+ 0.125;
+    console.log("velocidad: "+personaje.velocidad);
 		resetear();
 	}
 };
