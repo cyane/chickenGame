@@ -20,22 +20,27 @@
 <script >
   
   //cookies
-function setCookie(cvalue) {
-    document.cookie = cvalue;
+function setCookie(cname,cvalue) {
+    document.cookie = cname + "=" + cvalue + ";";
 }
 
-function getCookie() {
- return document.cookie.valueOf();
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+     if(ca[1]!=""){
+        return ca[1];
+    }
+    return "";
 }
 
 function checkCookie() {
-    var maximo = getCookie();
+    var maximo = getCookie("maximo");
     if (maximo != "") {
-        setCookie(0);
-        alert("max " + maximo);
+        alert(" max: "+max);
     } else {
+        maximo = prompt("Nickname:", "");
         if (maximo != "" && maximo != null) {
-            setCookie(0);
+            setCookie("maximo", maximo);
         }
     }
 }
