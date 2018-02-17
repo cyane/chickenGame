@@ -57,7 +57,7 @@ var personaje = {
     vida:vidaInicial
 };
 var gallina = {
-    velocidad=1
+    velocidad:4
 };
 
 var contador = 0;
@@ -86,19 +86,15 @@ var actualizar = function () {
     canvas.style.height = window.innerHeight-30 + "px";
 	if (38 in keysDown) { 
 		personajey -= personaje.velocidad ;
-    movimientoGallina()
 	}
 	if (40 in keysDown) { 
 		personajey += personaje.velocidad ;
-    movimientoGallina()
 	}
 	if (37 in keysDown) { 
 		personajex -= personaje.velocidad ;
-     movimientoGallina()
 	}
 	if (39 in keysDown) { 
 		personajex += personaje.velocidad ;
-     movimientoGallina()
 	}
 
   
@@ -106,19 +102,19 @@ var actualizar = function () {
   switch(Math.floor(5 * Math.random())) {
     case 1:
         console.log("1");
-      gallinax-=
+      gallinax-=gallina.velocidad;
         break;
     case 2:
         console.log("2");
-      gallinax+=
+      gallinax+=gallina.velocidad;
         break;
     case 3:
         console.log("3");
-      gallinay-
+      gallinay-=gallina.velocidad;
         break;
     case 4:
         console.log("4");
-      gallinay
+      gallinay+=gallina.velocidad;
         break;
     default:
         break;
@@ -154,6 +150,8 @@ var actualizar = function () {
       contador=0;
     }
   }
+  
+     movimientoGallina()
 };
 
 // pintar las gallinas
