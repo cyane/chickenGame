@@ -36,11 +36,9 @@ var personaje = {
 };
 var gallina = {};
   
-var contadorMax = 0;
-localStorage.setItem(contadorMax, 0);
-  
-  
+var contadorMax = 3;  
 var contador = 0;
+localStorage.setItem(contadorMax, contador); 
 // control del personaje al puplsar y despulsar la tecla
 var keysDown = {};
 addEventListener("keydown", function (e) {
