@@ -35,10 +35,12 @@ var personaje = {
     velocidad: 3
 };
 var gallina = {};
-  
-var contadorMax = 3;  
+
 var contador = 0;
-localStorage.setItem(contadorMax, contador); 
+  
+  
+  document.cookie = "maximas=max";
+  
 // control del personaje al puplsar y despulsar la tecla
 var keysDown = {};
 addEventListener("keydown", function (e) {
@@ -81,9 +83,6 @@ var actualizar = function () {
 		&& gallinay <= (personajey + 20)
 	) {
 		++contador;
-    if(contador>localStorage.getItem(contadorMax)){
-     localStorage.setItem(contadorMax, contador); 
-    }
 		resetear();
 	}
 };
@@ -99,7 +98,7 @@ var pintar = function () {
 	ctx.textAlign = "left";
     ctx.font = "18px Comic Sans MS";
 	ctx.textBaseline = "top";
-	ctx.fillText("Gallinas Atrapadas " + contador+" Max:"+localStorage.getItem(contadorMax),canvas.width/2-150, 0);
+	ctx.fillText("Gallinas Atrapadas " + contador,canvas.width/2-70, 0);
 };		
     
     
