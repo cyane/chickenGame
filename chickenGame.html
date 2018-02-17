@@ -76,6 +76,9 @@ var actualizar = function () {
 		&& gallinay <= (personajey + 20)
 	) {
 		++contador;
+    if(contador>contadorMax){
+     contadorMax=contador; 
+    }
 		resetear();
 	}
 };
@@ -92,6 +95,7 @@ var pintar = function () {
     ctx.font = "18px Comic Sans MS";
 	ctx.textBaseline = "top";
 	ctx.fillText("Gallinas Atrapadas " + contador, canvas.width/2-70, 0);
+  ctx.fillText("record" + contadorMax, canvas.width/2-50, 0);
 };		
     
     
