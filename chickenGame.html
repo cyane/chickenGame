@@ -59,7 +59,7 @@ var personaje = {
     vida:vidaInicial
 };
 var gallina = {
-    velocidad:4
+    velocidad:10
 };
 var gallinaEnemiga={
 };
@@ -128,14 +128,12 @@ var actualizar = function () {
   }
    
    function controlGallina(x,y){
-     if(x >= canvas.width+20 
-      ||x <= canvas.width-canvas.width-50 
-      || y >= canvas.height+20 
-      || y <= canvas.height-canvas.height-40){
-       console.log("e");
+     if(x >= canvas.width 
+      ||x <= canvas.width-canvas.width 
+      || y >= canvas.height 
+      || y <= canvas.height-canvas.height){
         return 0;
      }else{
-       console.log("t");
        return gallina.velocidad;
      }
   }
