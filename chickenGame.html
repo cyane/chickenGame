@@ -108,19 +108,19 @@ var actualizar = function () {
   switch(Math.floor(5 * Math.random())) {
     case 1:
         gallinax-=controlGallina(gallinax,gallinay);
-        gallinaEnemigax-=controlGallina(gallinaEnemigax,gallinaEnemigay);
+        gallinaEnemigay-=controlGallina(gallinaEnemigax,gallinaEnemigay);
         break;
     case 2:
         gallinax+=controlGallina(gallinax,gallinay);
         gallinaEnemigax+=controlGallina(gallinaEnemigax,gallinaEnemigay);
         break;
     case 3:
-        gallinay-=controlGallina(gallinax,gallinay);
-        gallinaEnemigay-=controlGallina(gallinaEnemigax,gallinaEnemigay);
+        gallinay-=controlGallina(gallinax,gallinay);  
+        gallinaEnemigay+=controlGallina(gallinaEnemigax,gallinaEnemigay);
         break;
     case 4:
         gallinay+=controlGallina(gallinax,gallinay);
-        gallinaEnemigay+=controlGallina(gallinaEnemigax,gallinaEnemigay);
+        gallinaEnemigax-=controlGallina(gallinaEnemigax,gallinaEnemigay);
         break;
     default:
         break;
@@ -198,7 +198,7 @@ var pintar = function () {
 	context.drawImage(imagenPersonaje, personajex, personajey);
 	context.drawImage(imagenGallina, gallinax, gallinay);
   context.drawImage(imagenEnemigo, gallinaEnemigax, gallinaEnemigay);
-    
+
     
 	// pmarcador de puntuacion
 	context.fillStyle = "rgba(8, 8, 141, 0.97)";
@@ -207,7 +207,7 @@ var pintar = function () {
 	context.textBaseline = "top";
   let speed= (personaje.velocidad.valueOf());
 	context.fillText("Gallinas Atrapadas: " + contador + " | velocidad " + speed+" | personal: " + getCookie("maximo") +" vida:"+personaje.vida /*+ " global: " + localStorage.getItem("maxG")*/,canvas.width-canvas.width+1, 0);
-};		
+ };   
     var micanvas, context;
     var tiempo = 0;
     var stop;
