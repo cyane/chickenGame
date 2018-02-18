@@ -126,12 +126,13 @@ var actualizar = function () {
         break;
 }
   }
-   
+  window.setTimeout(function(){movimientoGallina()}, 200000); 
    function controlGallina(x,y){
      if(x >= canvas.width 
       ||x <= canvas.width-canvas.width 
       || y >= canvas.height 
       || y <= canvas.height-canvas.height){
+       resetear()
         return 0;
      }else{
        return gallina.velocidad;
