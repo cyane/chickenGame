@@ -62,7 +62,6 @@ var gallina = {
     velocidad:4
 };
 var gallinaEnemiga={
-    velocidad:4
 };
   
 var contador = 0;
@@ -108,32 +107,38 @@ var actualizar = function () {
   function movimientoGallina(){
   switch(Math.floor(5 * Math.random())) {
     case 1:
-        console.log("1");
-        gallinax-=gallina.velocidad;
-        gallinaEnemigax-=gallinaEnemiga.velocidad;
-        controlGallina();
+        gallinax-=controlGallina(gallinax,gallinay);
+        gallinaEnemigax-=controlGallina(gallinaEnemigax,gallinaEnemigay);
         break;
     case 2:
-        console.log("2");
-        gallinax+=gallina.velocidad;
-        gallinaEnemigax+=gallinaEnemiga.velocidad;
+        gallinax+=controlGallina(gallinax,gallinay);
+        gallinaEnemigax+=controlGallina(gallinaEnemigax,gallinaEnemigay);
         break;
     case 3:
-        console.log("3");
-        gallinay-=gallina.velocidad;
-        gallinaEnemigay-=gallinaEnemiga.velocidad;
+        gallinay-=controlGallina(gallinax,gallinay);
+        gallinaEnemigay-=controlGallina(gallinaEnemigax,gallinaEnemigay);
         break;
     case 4:
-        console.log("4");
-        gallinay+=gallina.velocidad;
-        gallinaEnemigay+=gallinaEnemiga.velocidad;
+        gallinay+=controlGallina(gallinax,gallinay);
+        gallinaEnemigay+=controlGallina(gallinaEnemigax,gallinaEnemigay);
         break;
     default:
         break;
 }
   }
    
-   controlGallina();
+   function controlGallina(x,y){
+     if(x >= canvas.width+20 
+      ||x <= canvas.width-canvas.width-50 
+      || y >= canvas.height+20 
+      || y <= canvas.height-canvas.height-40){
+       console.log("e");
+        return 0;
+     }else{
+       console.log("t");
+       return gallina.velocidad;
+     }
+  }
   
 	//colision
 	if (
