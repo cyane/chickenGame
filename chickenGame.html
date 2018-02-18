@@ -183,6 +183,8 @@ var actualizar = function () {
       personajex = canvas.width / 2;
 	    personajey = canvas.height / 2;
       contador=0;
+      alert("has muerto, conseguiste atrapar a "):
+      document.location.href = document.location.href;
     }
   }else if(
 		personajex <= (gallinaEnemigax + 20)
@@ -198,6 +200,7 @@ var actualizar = function () {
       personajex = canvas.width / 2;
 	    personajey = canvas.height / 2;
       contador=0;
+      document.location.href = document.location.href;
     }
   }
     if(Math.floor(10 * Math.random())==5){
@@ -224,7 +227,7 @@ var pintar = function () {
     var tiempo = 0;
     var stop;
     var fondo = new Image();
-    fondo.src ='https://cdn.glitch.com/0c5fd143-6bda-4c72-915d-a4360fa2a11d%2Ffondo.png?1518731951745';
+    fondo.src ='https://cdn.glitch.com/e9545343-6e64-41a2-9975-7af28d904caa%2Fbeetlegrassedit.png?1518971333016';
     window.addEventListener('load',init);
 function init(){
 	micanvas = document.getElementById('canvas');
