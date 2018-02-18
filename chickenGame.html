@@ -15,14 +15,10 @@
 </head>
 
 <body >
-   <canvas id="canvas" onload="tamañoCanvas()"> </canvas>
+   <canvas id="canvas"> </canvas>
 </body>
 <script >
-  function tamañoCanvas(){
-var canvas = document.getElementById("canvas");
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-}
+
   //cookies
 function setCookie(cname,cvalue) {
     document.cookie = cname + "=" + cvalue + ";";
@@ -113,28 +109,32 @@ var actualizar = function () {
   switch(Math.floor(5 * Math.random())) {
     case 1:
         console.log("1");
-      gallinax-=gallina.velocidad;
-      gallinaEnemigax-=gallinaEnemiga.velocidad;
+        gallinax-=gallina.velocidad;
+        gallinaEnemigax-=gallinaEnemiga.velocidad;
+        controlGallina();
         break;
     case 2:
         console.log("2");
-      gallinax+=gallina.velocidad;
-         gallinaEnemigax+=gallinaEnemiga.velocidad;
+        gallinax+=gallina.velocidad;
+        gallinaEnemigax+=gallinaEnemiga.velocidad;
         break;
     case 3:
         console.log("3");
-      gallinay-=gallina.velocidad;
-       gallinaEnemigay-=gallinaEnemiga.velocidad;
+        gallinay-=gallina.velocidad;
+        gallinaEnemigay-=gallinaEnemiga.velocidad;
         break;
     case 4:
         console.log("4");
-      gallinay+=gallina.velocidad;
+        gallinay+=gallina.velocidad;
         gallinaEnemigay+=gallinaEnemiga.velocidad;
         break;
     default:
         break;
 }
   }
+   
+   controlGallina();
+  
 	//colision
 	if (
 		personajex <= (gallinax + 20)
@@ -151,6 +151,10 @@ var actualizar = function () {
     personaje.velocidad=personaje.velocidad+ 0.125;
     console.log("velocidad: "+personaje.velocidad);
     console.log(localStorage.getItem("maxG"));
+    personaje.vida+=5;
+    if(personaje.vida>100){
+       personaje.vida=100;
+       }
 		resetear();
 	}else if(personajex >= canvas.width+20 
            ||personajex <= canvas.width-canvas.width-50 
@@ -171,6 +175,7 @@ var actualizar = function () {
 		&& gallinaEnemigay <= (personajey + 20)
 	) {
     personaje.vida-=20;
+    resetear();
         if(personaje.vida<0){
       personaje.vida=100;
       personaje.velocidad=3;
