@@ -1,4 +1,6 @@
 
+<script >
+
   //cookies
 function setCookie(cname,cvalue) {
     document.cookie = cname + "=" + cvalue + ";";
@@ -36,13 +38,25 @@ var vidaInicial=100;
 var velocidadInicial=3;
 var personaje = {
     velocidad: velocidadInicial,
-    vida:vidaInicial
+    vida:vidaInicial,
+    posX:canvas.width-100,
+    posY: canvas.height-10
 };
+  var personajex=personaje.posX;
+  var personajey=personaje.posY;
 var gallina = {
-    velocidad:10
+    velocidad:10,
+    posX:Math.random() * (canvas.width -35),
+    posY: Math.random() * (canvas.height - 35)
 };
+  var gallinax=gallina.posX;
+  var gallinay=gallina.posY;
 var gallinaEnemiga={
+  posX: Math.random() * (canvas.height - 35),
+  posY: Math.random() * (canvas.height - 35)
 };
+  var gallinaEnemigax=gallinaEnemiga.posX;
+  var gallinaEnemigay=gallinaEnemiga.posY;
   
 var contador = 0;
   
@@ -228,3 +242,4 @@ var principal = function () {
 
 resetear();
 principal();        
+  </script>
