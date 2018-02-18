@@ -126,7 +126,7 @@ var actualizar = function () {
         break;
 }
   }
-  window.setTimeout(function(){movimientoGallina()}, 200000); 
+
    function controlGallina(x,y){
      if(x >= canvas.width 
       ||x <= canvas.width-canvas.width 
@@ -188,8 +188,9 @@ var actualizar = function () {
       contador=0;
     }
   }
-
+    if(Math.floor(10 * Math.random())==5){
      movimientoGallina();
+    }
 };
 
 // pintar las gallinas
