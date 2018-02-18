@@ -176,13 +176,13 @@ var actualizar = function () {
            || personajey >= canvas.height+20 
            || personajey <= canvas.height-canvas.height-40){
       personaje.vida--;
-    if(personaje.vida<0){
+    if(personaje.vida<=0){
       personaje.vida=100;
       personaje.velocidad=3;
       personajex = canvas.width / 2;
 	    personajey = canvas.height / 2;
       personaje.contador=0;
-      alert("has muerto, conseguiste atrapar a "+personaje.contador);
+      alert("has muerto");
       document.location.href = document.location.href;
     }
   }else if(
@@ -193,13 +193,13 @@ var actualizar = function () {
 	) {
     personaje.vida-=20;
     resetear();
-        if(personaje.vida<0){
+        if(personaje.vida<=0){
       personaje.vida=100;
       personaje.velocidad=3;
       personajex = canvas.width / 2;
 	    personajey = canvas.height / 2;
       personaje.contador=0;
-      alert("has muerto, conseguiste atrapar a "+personaje.contador);
+      alert("has muerto");
       document.location.href = document.location.href;
     }
   }
