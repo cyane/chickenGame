@@ -110,18 +110,22 @@ var actualizar = function () {
     case 1:
         console.log("1");
       gallinax-=gallina.velocidad;
+      gallinaEnemigax-=gallinaEnemiga.velocidad;
         break;
     case 2:
         console.log("2");
       gallinax+=gallina.velocidad;
+         gallinaEnemigax+=gallinaEnemiga.velocidad;
         break;
     case 3:
         console.log("3");
       gallinay-=gallina.velocidad;
+       gallinaEnemigay-=gallinaEnemiga.velocidad;
         break;
     case 4:
         console.log("4");
       gallinay+=gallina.velocidad;
+        gallinaEnemigay+=gallinaEnemiga.velocidad;
         break;
     default:
         break;
@@ -163,9 +167,18 @@ var actualizar = function () {
 		&& gallinaEnemigay <= (personajey + 20)
 	) {
     personaje.vida-=20;
+    personajex = canvas.width / 2;
+	  personajey = canvas.height / 2;
+        if(personaje.vida<0){
+      personaje.vida=100;
+      personaje.velocidad=3;
+      personajex = canvas.width / 2;
+	    personajey = canvas.height / 2;
+      contador=0;
+    }
   }
-  
-     movimientoGallina()
+
+     movimientoGallina();
 };
 
 // pintar las gallinas
