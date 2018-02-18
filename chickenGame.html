@@ -58,6 +58,7 @@ var velocidadInicial=3;
 var personaje = {
     velocidad: velocidadInicial,
     vida:vidaInicial,
+    contador:0,
     posX:canvas.width-100,
     posY: canvas.height-10
 };
@@ -76,9 +77,7 @@ var gallinaEnemiga={
 };
   var gallinaEnemigax=gallinaEnemiga.posX;
   var gallinaEnemigay=gallinaEnemiga.posY;
-  
-var contador = 0;
-  
+
 // control del personaje al puplsar y despulsar la tecla
 var keysDown = {};
 addEventListener("keydown", function (e) {
@@ -158,11 +157,11 @@ var actualizar = function () {
 		&& personajey <= (gallinay + 20)
 		&& gallinay <= (personajey + 20)
 	) {
-		++contador;
-    if(contador>getCookie("maximo")){
-      setCookie("maximo", contador);
-      console.log("nuevo maximo personal de "+contador);
-      localStorage.setItem("maxG", contador);
+		++personaje.contador;
+    if(personaje.contador>getCookie("maximo")){
+      setCookie("maximo", personaje.contador);
+      console.log("nuevo maximo personal de "+personaje.contador);
+      localStorage.setItem("maxG", personaje.contador);
     }
     personaje.velocidad=personaje.velocidad+ 0.125;
     console.log("velocidad: "+personaje.velocidad);
@@ -182,8 +181,8 @@ var actualizar = function () {
       personaje.velocidad=3;
       personajex = canvas.width / 2;
 	    personajey = canvas.height / 2;
-      contador=0;
-      alert("has muerto, conseguiste atrapar a "):
+      personaje.contador=0;
+      alert("has muerto, conseguiste atrapar a "+personaje.contador);
       document.location.href = document.location.href;
     }
   }else if(
@@ -199,7 +198,8 @@ var actualizar = function () {
       personaje.velocidad=3;
       personajex = canvas.width / 2;
 	    personajey = canvas.height / 2;
-      contador=0;
+      personaje.contador=0;
+      alert("has muerto, conseguiste atrapar a "+personaje.contador);
       document.location.href = document.location.href;
     }
   }
@@ -221,7 +221,7 @@ var pintar = function () {
   context.font = "15px Comic Sans MS";
 	context.textBaseline = "top";
   let speed= (personaje.velocidad.valueOf());
-	context.fillText("Gallinas Atrapadas: " + contador + " | velocidad " + speed+" | personal: " + getCookie("maximo") +" vida:"+personaje.vida /*+ " global: " + localStorage.getItem("maxG")*/,canvas.width-canvas.width+1, 0);
+	context.fillText("Gallinas Atrapadas: " + personaje.contador + " | velocidad " + speed+" | personal: " + getCookie("maximo") +" vida:"+personaje.vida /*+ " global: " + localStorage.getItem("maxG")*/,canvas.width-canvas.width+1, 0);
  };   
     var micanvas, context;
     var tiempo = 0;
