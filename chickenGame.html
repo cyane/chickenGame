@@ -213,7 +213,8 @@ var pintar = function () {
 	context.drawImage(imagenPersonaje, personajex, personajey);
 	context.drawImage(imagenGallina, gallinax, gallinay);
   context.drawImage(imagenEnemigo, gallinaEnemigax, gallinaEnemigay);
-
+  //
+  context.drawImage(avion, 0, avionFrameActual * avionAltoFrame, avionAnchoFrame, avionAltoFrame, avionPosX, avionPosY, avionEX, avionEY);
     
 	// pmarcador de puntuacion
 	context.fillStyle = "rgba(8, 8, 141, 0.97)";
