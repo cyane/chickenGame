@@ -141,8 +141,8 @@ var actualizar = function () {
   }
 
    function controlGallina(x,y){
-     if(x >= canvas.width 
-      ||x <= canvas.width-canvas.width 
+     if( x >= canvas.width 
+      || x <= canvas.width-canvas.width 
       || y >= canvas.height 
       || y <= canvas.height-canvas.height){
        resetear()
@@ -249,7 +249,7 @@ function detener(){
 function dibujar(context){
 	context.clearRect(0,0,micanvas.width,micanvas.height);
 	context.drawImage(fondo,tiempo,0);		
-    context.drawImage(fondo,tiempo-448,0);	 
+  context.drawImage(fondo,tiempo-448,0);	 
 	tiempo--;
     if(tiempo<0){
 		tiempo = tiempo + 448;	
