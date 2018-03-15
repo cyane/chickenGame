@@ -16,7 +16,6 @@
 
 <body >
    <canvas id="canvas"> </canvas>
-    <canvas id="canvas2"> </canvas>
 </body>
 
 <script >
@@ -44,10 +43,7 @@ function checkCookie() {
 // creando el canvas
 var canvas = document.getElementById("canvas");
 var context = canvas.getContext("2d");
-var canvas2= document.getElementById("canvas2");
-var context2=canvas2.getContext("2d");
     document.body.appendChild(canvas);
-    document.body.appendChild(canvas2);
 
 var imagenPersonaje = new Image();
     imagenPersonaje.src = "https://cdn.glitch.com/0c5fd143-6bda-4c72-915d-a4360fa2a11d%2FputoTOnto.png?1518914638385";
@@ -219,7 +215,6 @@ var pintar = function () {
 	context.drawImage(imagenPersonaje, personajex, personajey);
 	context.drawImage(imagenGallina, gallinax, gallinay);
   context.drawImage(imagenEnemigo, gallinaEnemigax, gallinaEnemigay);
-  context2.drawImage(imagen);
  // context.drawImage(imagenGallina, 0, gallinax, gallinay, imagenGallina2, gallinax, gallinay);
     
 	// pmarcador de puntuacion
