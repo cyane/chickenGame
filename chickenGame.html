@@ -98,6 +98,17 @@ var resetear = function () {
   gallinaEnemigax = Math.random() * (canvas.width -35);
 	gallinaEnemigay = Math.random() * (canvas.height - 35);
 };
+  var muertePersonaje = function() {
+        if(personaje.vida<=0){
+      personaje.vida=100;
+      personaje.velocidad=3;
+      personajex = canvas.width / 2;
+	    personajey = canvas.height / 2;
+      personaje.contador=0;
+      alert("has muerto");
+      document.location.href = document.location.href;
+    }
+  }
 
 // movimiento
 var actualizar = function () { 
@@ -186,16 +197,8 @@ var actualizar = function () {
            ||personajex <= canvas.width-canvas.width-50 
            || personajey >= canvas.height+20 
            || personajey <= canvas.height-canvas.height-40){
-      personaje.vida--;
-    if(personaje.vida<=0){
-      personaje.vida=100;
-      personaje.velocidad=3;
-      personajex = canvas.width / 2;
-	    personajey = canvas.height / 2;
-      personaje.contador=0;
-      alert("has muerto");
-      document.location.href = document.location.href;
-    }
+    personaje.vida--;
+    muertePersonaje();
   }else if(
 		personajex <= (gallinaEnemigax + 20)
 		&& gallinaEnemigax <= (personajex + 20)
@@ -204,18 +207,10 @@ var actualizar = function () {
 	) {
     personaje.vida-=20;
     resetear();
-        if(personaje.vida<=0){
-      personaje.vida=100;
-      personaje.velocidad=3;
-      personajex = canvas.width / 2;
-	    personajey = canvas.height / 2;
-      personaje.contador=0;
-      alert("has muerto");
-      document.location.href = document.location.href;
-    }
+    muertePersonaje();
   }
     if(Math.floor(6 * Math.random())==5){
-     //  gallina.velocidad= Math.random()*15;
+      gallina.velocidad= Math.random()*25;
      movimientoGallina();
     }
 };
