@@ -74,7 +74,7 @@ var gallina = {
   var gallinax=gallina.posX;
   var gallinay=gallina.posY;
 var gallinaEnemiga={
-  posX: Math.random() * (canvas.height - 35),
+  posX: Math.random() * (canvas.width - 35),
   posY: Math.random() * (canvas.height - 35)
 };
   var gallinaEnemigax=gallinaEnemiga.posX;
@@ -120,7 +120,12 @@ var actualizar = function () {
   function movimientoGallina(){
   switch(Math.floor(5 * Math.random())) {
     case 1:
-        gallinax-=controlGallina(gallinax,gallinay);
+                console.log(gallinax);
+          console.log(personajex);
+        if(gallinax>personajex+20){
+
+          gallinax-=controlGallina(gallinax,gallinay);
+        }
         gallinaEnemigay-=controlGallina(gallinaEnemigax,gallinaEnemigay);
         break;
     case 2:
