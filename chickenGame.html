@@ -67,7 +67,7 @@ var personaje = {
   var personajex=personaje.posX;
   var personajey=personaje.posY;
 var gallina = {
-    velocidad:5,
+    velocidad:5 ,
     posX:Math.random() * (canvas.width -35),
     posY: Math.random() * (canvas.height - 35)
 };
@@ -118,29 +118,30 @@ var actualizar = function () {
 
   
   function movimientoGallina(){
+    console.log(gallina.velocidad);
   switch(Math.floor(5 * Math.random())) {
     case 1:
-        if(gallinax<personajex+30){
+        //if(gallinax<personajex+30){
           gallinax-=controlGallina(gallinax,gallinay);
-        }
+        //}
         gallinaEnemigay-=controlGallina(gallinaEnemigax,gallinaEnemigay);
         break;
     case 2:
-        if(gallinax>personajex+30){
+        //if(gallinax>personajex+30){
         gallinax+=controlGallina(gallinax,gallinay);
-        }
+       // }
         gallinaEnemigax+=controlGallina(gallinaEnemigax,gallinaEnemigay);
         break;
     case 3:
-        if(gallinay<personajey+30){
+        //if(gallinay<personajey+30){
         gallinay-=controlGallina(gallinax,gallinay);  
-        }
+        //}
         gallinaEnemigay+=controlGallina(gallinaEnemigax,gallinaEnemigay);
         break;
     case 4:
-        if(gallinay>personajey+30){
+        //if(gallinay>personajey+30){
         gallinay+=controlGallina(gallinax,gallinay);
-        }
+        //}
         gallinaEnemigax-=controlGallina(gallinaEnemigax,gallinaEnemigay);
         break;
     default:
@@ -214,6 +215,7 @@ var actualizar = function () {
     }
   }
     if(Math.floor(6 * Math.random())==5){
+       gallina.velocidad= Math.random()*15;
      movimientoGallina();
     }
 };
