@@ -136,7 +136,6 @@ var actualizar = function () {
 	}
   
   function movimientoGallina(){
-    console.log(gallina.velocidad);
   switch(Math.floor(5 * Math.random())) {
     case 1:
         //if(gallinax<personajex+30){
@@ -172,7 +171,26 @@ var actualizar = function () {
       || x <= canvas.width-canvas.width 
       || y >= canvas.height 
       || y <= canvas.height-canvas.height){
-       resetear()
+       //resetear()
+       console.log(gallinax,gallinay);
+       gallinax=Math.abs(gallinax-canvas.width)+20;
+       gallinay=Math.abs(gallinay-canvas.height)+20;
+       console.log(gallinax,gallinay);
+        return 0;
+     }else{
+       return gallina.velocidad;
+     }
+  }
+     function controlGallinaEnemiga(x,y){//TODO colision lado pantalla
+     if( x >= canvas.width 
+      || x <= canvas.width-canvas.width 
+      || y >= canvas.height 
+      || y <= canvas.height-canvas.height){
+       //resetear()
+       console.log(gallinaEnemigax,gallinaEnemigaY);
+       gallinax=Math.abs(gallinaEnemigax-canvas.width)+20;
+       gallinay=Math.abs(gallinay-canvas.height)+20;
+       console.log(gallinaEnemigax,gallinay);
         return 0;
      }else{
        return gallina.velocidad;
