@@ -120,24 +120,27 @@ var actualizar = function () {
   function movimientoGallina(){
   switch(Math.floor(5 * Math.random())) {
     case 1:
-                console.log(gallinax);
-          console.log(personajex);
-        if(gallinax>personajex+20){
-
+        if(gallinax<personajex+30){
           gallinax-=controlGallina(gallinax,gallinay);
         }
         gallinaEnemigay-=controlGallina(gallinaEnemigax,gallinaEnemigay);
         break;
     case 2:
+        if(gallinax>personajex+30){
         gallinax+=controlGallina(gallinax,gallinay);
+        }
         gallinaEnemigax+=controlGallina(gallinaEnemigax,gallinaEnemigay);
         break;
     case 3:
+        if(gallinay<personajey+30){
         gallinay-=controlGallina(gallinax,gallinay);  
+        }
         gallinaEnemigay+=controlGallina(gallinaEnemigax,gallinaEnemigay);
         break;
     case 4:
+        if(gallinay>personajey+30){
         gallinay+=controlGallina(gallinax,gallinay);
+        }
         gallinaEnemigax-=controlGallina(gallinaEnemigax,gallinaEnemigay);
         break;
     default:
