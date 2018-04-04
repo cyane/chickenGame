@@ -120,13 +120,16 @@ var actualizar = function () {
 	if (40 in keysDown) { 
 		personajey += personaje.velocidad ;
 	}
-	if (37 in keysDown) { 
+  if(37 in keysDown && (40 in keysDown|| 38 in keysDown)){
+    personajex -= personaje.velocidad/2 ;
+  }	else if (37 in keysDown) { 
 		personajex -= personaje.velocidad ;
 	}
-	if (39 in keysDown) { 
+	if(39 in keysDown && (38 in keysDown|| 40 in keysDown)){
+    personajex += personaje.velocidad/2 ;
+  }else if(39 in keysDown) { 
 		personajex += personaje.velocidad ;
 	}
-
   
   function movimientoGallina(){
     console.log(gallina.velocidad);
