@@ -141,25 +141,25 @@ var actualizar = function () {
         //if(gallinax<personajex+30){
           gallinax-=controlGallina(gallinax,gallinay);
         //}
-        gallinaEnemigay-=controlGallina(gallinaEnemigax,gallinaEnemigay);
+        gallinaEnemigay-=controlGallinaEnemiga(gallinaEnemigax,gallinaEnemigay);
         break;
     case 2:
         //if(gallinax>personajex+30){
         gallinax+=controlGallina(gallinax,gallinay);
        // }
-        gallinaEnemigax+=controlGallina(gallinaEnemigax,gallinaEnemigay);
+        gallinaEnemigax+=controlGallinaEnemiga(gallinaEnemigax,gallinaEnemigay);
         break;
     case 3:
         //if(gallinay<personajey+30){
         gallinay-=controlGallina(gallinax,gallinay);  
         //}
-        gallinaEnemigay+=controlGallina(gallinaEnemigax,gallinaEnemigay);
+        gallinaEnemigay+=controlGallinaEnemiga(gallinaEnemigax,gallinaEnemigay);
         break;
     case 4:
         //if(gallinay>personajey+30){
         gallinay+=controlGallina(gallinax,gallinay);
         //}
-        gallinaEnemigax-=controlGallina(gallinaEnemigax,gallinaEnemigay);
+        gallinaEnemigax-=controlGallinaEnemiga(gallinaEnemigax,gallinaEnemigay);
         break;
     default:
         break;
@@ -173,8 +173,8 @@ var actualizar = function () {
       || y <= canvas.height-canvas.height){
        //resetear()
        console.log(gallinax,gallinay);
-       gallinax=Math.abs(gallinax-canvas.width)+20;
-       gallinay=Math.abs(gallinay-canvas.height)+20;
+       gallinax=Math.abs(gallinax-canvas.width)+10;
+       gallinay=Math.abs(gallinay-canvas.height)+10;
        console.log(gallinax,gallinay);
         return 0;
      }else{
@@ -184,13 +184,14 @@ var actualizar = function () {
      function controlGallinaEnemiga(x,y){//TODO colision lado pantalla
      if( x >= canvas.width 
       || x <= canvas.width-canvas.width 
-      || y >= canvas.height 
+        }
+     if || y >= canvas.height 
       || y <= canvas.height-canvas.height){
        //resetear()
-       console.log(gallinaEnemigax,gallinaEnemigaY);
-       gallinax=Math.abs(gallinaEnemigax-canvas.width)+20;
-       gallinay=Math.abs(gallinay-canvas.height)+20;
-       console.log(gallinaEnemigax,gallinay);
+       console.log(gallinaEnemigax,gallinaEnemigay);
+       gallinaEnemigax=Math.abs(gallinaEnemigax-canvas.width)+10;
+       gallinaEnemigay=Math.abs(gallinaEnemigay-canvas.height)+10;
+       console.log(gallinaEnemigax,gallinaEnemigay);
         return 0;
      }else{
        return gallina.velocidad;
