@@ -132,43 +132,61 @@ var actualizar = function () {
     console.log(gallina.velocidad);
   switch(Math.floor(5 * Math.random())) {
     case 1:
+      if(controlGallina(gallinax,gallinay)){   
         //if(gallinax<personajex+30){
-          gallinax-=controlGallina(gallinax,gallinay);
+          gallinax-=gallina.velocidad;;
         //}
-        gallinaEnemigay-=controlGallina(gallinaEnemigax,gallinaEnemigay);
+      }
+      if(controlGallina(gallinaEnemigax,gallinaEnemigay)){ 
+        gallinaEnemigay-=gallina.velocidad;
+      }
         break;
     case 2:
+      if(controlGallina(gallinax,gallinay)){   
         //if(gallinax>personajex+30){
-        gallinax+=controlGallina(gallinax,gallinay);
+        gallinax+=gallina.velocidad;;
        // }
-        gallinaEnemigax+=controlGallina(gallinaEnemigax,gallinaEnemigay);
+      }
+      if(controlGallina(gallinaEnemigax,gallinaEnemigay)){ 
+        gallinaEnemigax+=gallina.velocidad;
+      }
         break;
     case 3:
+      if(controlGallina(gallinax,gallinay)){   
         //if(gallinay<personajey+30){
-        gallinay-=controlGallina(gallinax,gallinay);  
+        gallinay-=gallina.velocidad;;  
         //}
-        gallinaEnemigay+=controlGallina(gallinaEnemigax,gallinaEnemigay);
+      }
+      if(controlGallina(gallinaEnemigax,gallinaEnemigay)){ 
+        gallinaEnemigay+=gallina.velocidad;
+      }
         break;
     case 4:
+      if(controlGallina(gallinax,gallinay)){        
         //if(gallinay>personajey+30){
-        gallinay+=controlGallina(gallinax,gallinay);
+        gallinay+=gallina.velocidad;
         //}
-        gallinaEnemigax-=controlGallina(gallinaEnemigax,gallinaEnemigay);
+      }
+      if(controlGallina(gallinaEnemigax,gallinaEnemigay)){ 
+        gallinaEnemigax-=gallina.velocidad;
+          }
         break;
     default:
         break;
 }
   }
 
-   function controlGallina(x,y){//colision lado pantalla
+   function controlGallina(x,y){//TODO colision lado pantalla
      if( x >= canvas.width 
       || x <= canvas.width-canvas.width 
       || y >= canvas.height 
       || y <= canvas.height-canvas.height){
        //resetear()
-        return 0;
+       return movimientoGallina();
+       // return 0;
      }else{
-       return gallina.velocidad;
+       return true;
+       //return gallina.velocidad;
      }
   }
   
