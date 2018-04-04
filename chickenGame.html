@@ -114,19 +114,23 @@ var resetear = function () {
 var actualizar = function () { 
     canvas.style.width = window.innerWidth-30 + "px";
     canvas.style.height = window.innerHeight-30 + "px";
-	if (38 in keysDown) { 
-		personajey -= personaje.velocidad ;
-	}
-	if (40 in keysDown) { 
-		personajey += personaje.velocidad ;
-	}
+	if (38 in keysDown &&(37 in keysDown|| 39 in keysDown)) { 
+		personajey -= personaje.velocidad/1.5 ;
+	}else if(38 in keysDown){
+      personajey -= personaje.velocidad ;     
+  }
+	if (40 in keysDown &&(37 in keysDown|| 39 in keysDown)) { 
+		personajey += personaje.velocidad/1.5 ;
+	}else if(40 in keysDown ){
+      personajey += personaje.velocidad ;  
+  }
   if(37 in keysDown && (40 in keysDown|| 38 in keysDown)){
-    personajex -= personaje.velocidad/2 ;
+    personajex -= personaje.velocidad/1.5 ;
   }	else if (37 in keysDown) { 
 		personajex -= personaje.velocidad ;
 	}
 	if(39 in keysDown && (38 in keysDown|| 40 in keysDown)){
-    personajex += personaje.velocidad/2 ;
+    personajex += personaje.velocidad/1.5 ;
   }else if(39 in keysDown) { 
 		personajex += personaje.velocidad ;
 	}
