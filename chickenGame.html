@@ -132,44 +132,28 @@ var actualizar = function () {
     console.log(gallina.velocidad);
   switch(Math.floor(5 * Math.random())) {
     case 1:
-      if(controlGallina(gallinax,gallinay)){   
         //if(gallinax<personajex+30){
-          gallinax-=gallina.velocidad;;
+          gallinax-=controlGallina(gallinax,gallinay);
         //}
-      }
-      if(controlGallina(gallinaEnemigax,gallinaEnemigay)){ 
-        gallinaEnemigay-=gallina.velocidad;
-      }
+        gallinaEnemigay-=controlGallina(gallinaEnemigax,gallinaEnemigay);
         break;
     case 2:
-      if(controlGallina(gallinax,gallinay)){   
         //if(gallinax>personajex+30){
-        gallinax+=gallina.velocidad;;
+        gallinax+=controlGallina(gallinax,gallinay);
        // }
-      }
-      if(controlGallina(gallinaEnemigax,gallinaEnemigay)){ 
-        gallinaEnemigax+=gallina.velocidad;
-      }
+        gallinaEnemigax+=controlGallina(gallinaEnemigax,gallinaEnemigay);
         break;
     case 3:
-      if(controlGallina(gallinax,gallinay)){   
         //if(gallinay<personajey+30){
-        gallinay-=gallina.velocidad;;  
+        gallinay-=controlGallina(gallinax,gallinay);  
         //}
-      }
-      if(controlGallina(gallinaEnemigax,gallinaEnemigay)){ 
-        gallinaEnemigay+=gallina.velocidad;
-      }
+        gallinaEnemigay+=controlGallina(gallinaEnemigax,gallinaEnemigay);
         break;
     case 4:
-      if(controlGallina(gallinax,gallinay)){        
         //if(gallinay>personajey+30){
-        gallinay+=gallina.velocidad;
+        gallinay+=controlGallina(gallinax,gallinay);
         //}
-      }
-      if(controlGallina(gallinaEnemigax,gallinaEnemigay)){ 
-        gallinaEnemigax-=gallina.velocidad;
-          }
+        gallinaEnemigax-=controlGallina(gallinaEnemigax,gallinaEnemigay);
         break;
     default:
         break;
@@ -181,12 +165,10 @@ var actualizar = function () {
       || x <= canvas.width-canvas.width 
       || y >= canvas.height 
       || y <= canvas.height-canvas.height){
-       //resetear()
-       return movimientoGallina();
-       // return 0;
+       resetear()
+        return 0;
      }else{
-       return true;
-       //return gallina.velocidad;
+       return gallina.velocidad;
      }
   }
   
@@ -228,7 +210,6 @@ var actualizar = function () {
     muertePersonaje();
   }
     if(Math.floor(6 * Math.random())==5){
-      gallina.velocidad= Math.random()*25;
      movimientoGallina();
     }
 };
