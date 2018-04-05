@@ -66,7 +66,7 @@ addEventListener("keyup", function (e) {
 	delete keysDown[e.keyCode];
 }, false);
 // poner cood pj en juego
-    personaje.posX = canvas.width-100;
+  personaje.posX = canvas.width-100;
 	personaje.posY = canvas.height-10;
 var resetear = function () {
 	// poner random a la gallina por el mapa al morir
@@ -229,6 +229,8 @@ var actualizar = function () {
      movimientoGallina();
     }
 };
+
+
 
 // pintar las gallinas
 var pintar = function () {
