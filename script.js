@@ -147,24 +147,24 @@ var actualizar = function () {
 function movimientoGallina(objetoGallina) {
     switch (Math.floor(5 * Math.random())) {
         case 1:
-            if (objetoGallina.posX < personaje.posX + 30) {
+           // if (objetoGallina.posX < personaje.posX + 30) {
                 objetoGallina.posX -= controlGallina(objetoGallina);
-            }
+           // }
             break;
         case 2:
-            if (objetoGallina.posX > personaje.posX + 30) {
+           // if (objetoGallina.posX > personaje.posX + 30) {
                 objetoGallina.posX += controlGallina(objetoGallina);
-            }
+          //  }
             break;
         case 3:
-            if (objetoGallina.posY < personaje.posY + 30) {
+            //if (objetoGallina.posY < personaje.posY + 30) {
                 objetoGallina.posY -= controlGallina(objetoGallina);
-            }
+           // }
             break;
         case 4:
-            if (objetoGallina.posY > personaje.posY + 30) {
+          //  if (objetoGallina.posY > personaje.posY + 30) {
                 objetoGallina.posY += controlGallina(objetoGallina);
-            }
+         //   }
             break;
         default:
             break;
@@ -174,38 +174,20 @@ function movimientoGallina(objetoGallina) {
 function controlGallina(objetoGallina) { //TODO colision lado pantalla
     let x = objetoGallina.posX;
     let y = objetoGallina.posY;
-    if (x >= canvas.width || x <= canvas.width - canvas.width) {
-        console.log("x aliada", objetoGallina.posX);
-        objetoGallina.posX = Math.abs((objetoGallina.posX - canvas.width)) + 10;
-        console.log("x aliada", objetoGallina.posX);
+    if (x >= canvas.width) {
+        objetoGallina.posX = Math.abs((objetoGallina.posX - canvas.width)) + 20;
     }
-    if (y >= canvas.height || y <= canvas.height - canvas.height) {
-        console.log("y aliada", objetoGallina.posX, objetoGallina.posY);
-        objetoGallina.posY = Math.abs(gallina.posY - canvas.height) + 10;
-        console.log("y aliada", objetoGallina.posX, objetoGallina.posY);
+    if (x <= canvas.width - canvas.width){
+        objetoGallina.posX = Math.abs((objetoGallina.posX - canvas.width)) - 20;
+    }
+    if (y >= canvas.height) {
+        objetoGallina.posY = Math.abs(objetoGallina.posY - canvas.height) + 20;
+    }
+    if(y <= canvas.height - canvas.height){
+        objetoGallina.posY = Math.abs(objetoGallina.posY - canvas.height) - 20;
     }
     return objetoGallina.velocidad;
 }
-
-/*
-   function controlGallina(x,y){//TODO colision lado pantalla
-     if( x >= canvas.width 
-      || x <= canvas.width-canvas.width 
-      || y >= canvas.height 
-      || y <= canvas.height-canvas.height){
-       //resetear()
-       console.log(gallina.posX,gallina.posY);
-       gallina.posX=Math.abs(gallina.posX-canvas.width)+10;
-       gallina.posY=Math.abs(gallina.posY-canvas.height)+10;
-       console.log(gallina.posX,gallina.posY);
-        return 0;
-     }else{
-       return gallina.velocidad;
-     }
-  }
-  */
-
-
 
 //funcion para cuando el personaje muere
 var muertePersonaje = function () {
