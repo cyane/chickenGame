@@ -139,70 +139,52 @@ var actualizar = function () {
     muertePersonaje();
   }
     if(Math.floor(6 * Math.random())==5){
-     movimientoGallina();
+     movimientoGallina(gallina);
+     movimientoGallina(gallinaEnemiga);
     }
 };
 
-  function movimientoGallina(){
+  function movimientoGallina(objetoGallina){
   switch(Math.floor(5 * Math.random())) {
     case 1:
-        //if(gallina.posX<personaje.posX +30){
-          gallina.posX-=controlGallina(gallina.posX,gallina.posY);
+        //if(objetoGallina.posX<personaje.posX +30){
+          objetoGallina.posX-=controlGallina(objetoGallina);
         //}
-        gallinaEnemiga.posY-=controlGallinaEnemiga(gallinaEnemiga.posX,gallinaEnemiga.posY);
         break;
     case 2:
-        //if(gallina.posX>personaje.posX +30){
-        gallina.posX+=controlGallina(gallina.posX,gallina.posY);
+        //if(objetoGallina.posX>personaje.posX +30){
+        objetoGallina.posX+=controlGallina(objetoGallina);
        // }
-        gallinaEnemiga.posX+=controlGallinaEnemiga(gallinaEnemiga.posX,gallinaEnemiga.posY);
         break;
     case 3:
-        //if(gallina.posY<personaje.posY+30){
-        gallina.posY-=controlGallina(gallina.posX,gallina.posY);  
+        //if(objetoGallina.posY<personaje.posY+30){
+        objetoGallina.posY-=controlGallina(objetoGallina);  
         //}
-        gallinaEnemiga.posY+=controlGallinaEnemiga(gallinaEnemiga.posX,gallinaEnemiga.posY);
         break;
     case 4:
-        //if(gallina.posY>personaje.posY+30){
-        gallina.posY+=controlGallina(gallina.posX,gallina.posY);
+        //if(objetoGallina.posY>personaje.posY+30){
+        objetoGallina.posY+=controlGallina(objetoGallina);
         //}
-        gallinaEnemiga.posX-=controlGallinaEnemiga(gallinaEnemiga.posX,gallinaEnemiga.posY);
         break;
     default:
         break;
 }
   }
-
-     function controlGallina(x,y){//TODO colision lado pantalla
+     function controlGallina(objetoGallina){//TODO colision lado pantalla
+       let x = objetoGallina.posX;
+       let y = objetoGallina.posY;
      if( x >= canvas.width || x <= canvas.width-canvas.width){
-       console.log("x aliada",gallina.posX);
-       gallina.posX=Math.abs((gallina.posX-canvas.width))+10;
-       console.log("x aliada",gallina.posX);
+       console.log("x aliada",objetoGallina.posX);
+       objetoGallina.posX=Math.abs((objetoGallina.posX-canvas.width))+10;
+       console.log("x aliada",objetoGallina.posX);
         }
      if( y >= canvas.height || y <= canvas.height-canvas.height){
-       console.log("y aliada",gallina.posX,gallina.posY);
-       gallina.posY=Math.abs(gallina.posY-canvas.height)+10;
-       console.log("y aliada",gallina.posX,gallina.posY);
+       console.log("y aliada",objetoGallina.posX,objetoGallina.posY);
+       objetoGallina.posY=Math.abs(gallina.posY-canvas.height)+10;
+       console.log("y aliada",objetoGallina.posX,objetoGallina.posY);
      }
-       return gallina.velocidad;
-     
+       return objetoGallina.velocidad;
   }
-     function controlGallinaEnemiga(x,y){//TODO colision lado pantalla
-     if( x >= canvas.width || x <= canvas.width-canvas.width){
-       console.log("x enemiga",gallinaEnemiga.posX);
-       gallinaEnemiga.posX=Math.abs((gallinaEnemiga.posX-canvas.width))+10;
-       console.log("x enemiga",gallinaEnemiga.posX);
-        }
-     if( y >= canvas.height || y <= canvas.height-canvas.height){
-       console.log("y enemiga",gallinaEnemiga.posX,gallinaEnemiga.posY);
-       gallinaEnemiga.posY=Math.abs(gallinaEnemiga.posY-canvas.height)+10;
-       console.log("y enemiga",gallinaEnemiga.posX,gallinaEnemiga.posY);
-     }
-       return gallina.velocidad;
-     
-  }
-  
 
 /*
    function controlGallina(x,y){//TODO colision lado pantalla
