@@ -35,16 +35,25 @@ var imagenEnemigo = new Image();
 
     //objeto
 var vidaInicial=100;
-var velocidadInicial=3;
-var personaje = {
-    velocidad: velocidadInicial,
-    vida:vidaInicial,
-    contador:0,
-    posX:canvas.width-100,
-    posY:canvas.height-10
-};
-  var personajex=personaje.posX;
-  var personajey=personaje.posY;
+var velocidadPersonajeInicial=3;
+var velocidadGallina=5;
+
+function Gallina(velocidad,posX,posY){
+  this.velocidad=velocidad;
+  this.posX=posX;
+  this.posY=posY;
+}
+function Personaje(velocidad,posX,posY,vida,contador){
+  this.velocidad=velocidad;
+  this.posX=posX;
+  this.posY=posY;
+  this.contador=contador;
+  this.vida=vida;
+}
+var personaje = new Personaje(velocidadPersonajeInicial,canvas.width-100,canvas.height-10,vidaInicial,0)
+var personajex=personaje.posX;
+var personajey=personaje.posY;
+
 var gallina = {
     velocidad:5 ,
     posX:Math.random() * (canvas.width -35),
