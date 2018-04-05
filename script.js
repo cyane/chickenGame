@@ -144,7 +144,7 @@ var actualizar = function () {
         break;
 }
   }
-
+/*
    function controlGallina(x,y){//TODO colision lado pantalla
      if( x >= canvas.width 
       || x <= canvas.width-canvas.width 
@@ -160,16 +160,31 @@ var actualizar = function () {
        return gallina.velocidad;
      }
   }
-     function controlGallinaEnemiga(x,y){//TODO colision lado pantalla
+  */
+     function controlGallina(x,y){//TODO colision lado pantalla
      if( x >= canvas.width || x <= canvas.width-canvas.width){
-       console.log("x",gallinaEnemigax);
-       gallinaEnemigax=Math.abs((gallinaEnemigax-canvas.width))+10;
-       console.log("x",gallinaEnemigax);
+       console.log("x aliada",gallinax);
+       gallinax=Math.abs((gallinax-canvas.width))+10;
+       console.log("x aliada",gallinax);
         }
      if( y >= canvas.height || y <= canvas.height-canvas.height){
-       console.log("y",gallinaEnemigax,gallinaEnemigay);
+       console.log("y aliada",gallinax,gallinay);
+       gallinay=Math.abs(gallinay-canvas.height)+10;
+       console.log("y aliada",gallinax,gallinay);
+     }
+       return gallina.velocidad;
+     
+  }
+     function controlGallinaEnemiga(x,y){//TODO colision lado pantalla
+     if( x >= canvas.width || x <= canvas.width-canvas.width){
+       console.log("x enemiga",gallinaEnemigax);
+       gallinaEnemigax=Math.abs((gallinaEnemigax-canvas.width))+10;
+       console.log("x enemiga",gallinaEnemigax);
+        }
+     if( y >= canvas.height || y <= canvas.height-canvas.height){
+       console.log("y enemiga",gallinaEnemigax,gallinaEnemigay);
        gallinaEnemigay=Math.abs(gallinaEnemigay-canvas.height)+10;
-       console.log("y",gallinaEnemigax,gallinaEnemigay);
+       console.log("y enemiga",gallinaEnemigax,gallinaEnemigay);
      }
        return gallina.velocidad;
      
