@@ -162,14 +162,14 @@ var actualizar = function () {
   }
      function controlGallinaEnemiga(x,y){//TODO colision lado pantalla
      if( x >= canvas.width || x <= canvas.width-canvas.width){
-       console.log(gallinaEnemigax,gallinaEnemigay);
-       gallinaEnemigax=Math.abs(gallinaEnemigax-canvas.width)+10;
-       console.log(gallinaEnemigax,gallinaEnemigay);
+       console.log("x",gallinaEnemigax);
+       gallinaEnemigax=Math.abs((gallinaEnemigax-canvas.width))+10;
+       console.log("x",gallinaEnemigax);
         }
      if( y >= canvas.height || y <= canvas.height-canvas.height){
-       console.log(gallinaEnemigax,gallinaEnemigay);
+       console.log("y",gallinaEnemigax,gallinaEnemigay);
        gallinaEnemigay=Math.abs(gallinaEnemigay-canvas.height)+10;
-       console.log(gallinaEnemigax,gallinaEnemigay);
+       console.log("y",gallinaEnemigax,gallinaEnemigay);
      }
        return gallina.velocidad;
      
