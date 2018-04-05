@@ -37,6 +37,7 @@ var imagenGallina2 = new Image();
 var vidaInicial=100;
 var velocidadPersonajeInicial=3;
 var velocidadGallina=5;
+
 //constructores
 function Gallina(velocidad,posX,posY){
   this.velocidad=velocidad;
@@ -50,16 +51,11 @@ function Personaje(velocidad,posX,posY,vida,contador){
   this.contador=contador;
   this.vida=vida;
 }
-//objeto
+
+//objetos
 var personaje = new Personaje(velocidadPersonajeInicial,canvas.width-100,canvas.height-10,vidaInicial,0);
 var gallina = new Gallina(velocidadGallina,Math.random() * (canvas.width -35), Math.random() * (canvas.height - 35));
 var gallinaEnemiga = new Gallina(velocidadGallina,Math.random() * (canvas.width -35), Math.random() * (canvas.height - 35));
-
-
-var gallinax=gallina.posX;
-var gallinay=gallina.posY;
-var gallinaEnemigax=gallinaEnemiga.posX;
-var gallinaEnemigay=gallinaEnemiga.posY;
 
 // control del personaje al puplsar y despulsar la tecla
 var keysDown = {};
@@ -74,10 +70,10 @@ addEventListener("keyup", function (e) {
 	personaje.posY = canvas.height-10;
 var resetear = function () {
 	// poner random a la gallina por el mapa al morir
-	gallinax = Math.random() * (canvas.width -35);
-	gallinay = Math.random() * (canvas.height - 35);
-  gallinaEnemigax = Math.random() * (canvas.width -35);
-	gallinaEnemigay = Math.random() * (canvas.height - 35);
+	gallina.posX = Math.random() * (canvas.width -35);
+	gallina.posY = Math.random() * (canvas.height - 35);
+  gallinaEnemiga.posX = Math.random() * (canvas.width -35);
+	gallinaEnemiga.posY = Math.random() * (canvas.height - 35);
 };
   var muertePersonaje = function() {
         if(personaje.vida<=0){
@@ -119,28 +115,28 @@ var actualizar = function () {
   function movimientoGallina(){
   switch(Math.floor(5 * Math.random())) {
     case 1:
-        //if(gallinax<personaje.posX +30){
-          gallinax-=controlGallina(gallinax,gallinay);
+        //if(gallina.posX<personaje.posX +30){
+          gallina.posX-=controlGallina(gallina.posX,gallina.posY);
         //}
-        gallinaEnemigay-=controlGallinaEnemiga(gallinaEnemigax,gallinaEnemigay);
+        gallinaEnemiga.posY-=controlGallinaEnemiga(gallinaEnemiga.posX,gallinaEnemiga.posY);
         break;
     case 2:
-        //if(gallinax>personaje.posX +30){
-        gallinax+=controlGallina(gallinax,gallinay);
+        //if(gallina.posX>personaje.posX +30){
+        gallina.posX+=controlGallina(gallina.posX,gallina.posY);
        // }
-        gallinaEnemigax+=controlGallinaEnemiga(gallinaEnemigax,gallinaEnemigay);
+        gallinaEnemiga.posX+=controlGallinaEnemiga(gallinaEnemiga.posX,gallinaEnemiga.posY);
         break;
     case 3:
-        //if(gallinay<personaje.posY+30){
-        gallinay-=controlGallina(gallinax,gallinay);  
+        //if(gallina.posY<personaje.posY+30){
+        gallina.posY-=controlGallina(gallina.posX,gallina.posY);  
         //}
-        gallinaEnemigay+=controlGallinaEnemiga(gallinaEnemigax,gallinaEnemigay);
+        gallinaEnemiga.posY+=controlGallinaEnemiga(gallinaEnemiga.posX,gallinaEnemiga.posY);
         break;
     case 4:
-        //if(gallinay>personaje.posY+30){
-        gallinay+=controlGallina(gallinax,gallinay);
+        //if(gallina.posY>personaje.posY+30){
+        gallina.posY+=controlGallina(gallina.posX,gallina.posY);
         //}
-        gallinaEnemigax-=controlGallinaEnemiga(gallinaEnemigax,gallinaEnemigay);
+        gallinaEnemiga.posX-=controlGallinaEnemiga(gallinaEnemiga.posX,gallinaEnemiga.posY);
         break;
     default:
         break;
@@ -153,10 +149,10 @@ var actualizar = function () {
       || y >= canvas.height 
       || y <= canvas.height-canvas.height){
        //resetear()
-       console.log(gallinax,gallinay);
-       gallinax=Math.abs(gallinax-canvas.width)+10;
-       gallinay=Math.abs(gallinay-canvas.height)+10;
-       console.log(gallinax,gallinay);
+       console.log(gallina.posX,gallina.posY);
+       gallina.posX=Math.abs(gallina.posX-canvas.width)+10;
+       gallina.posY=Math.abs(gallina.posY-canvas.height)+10;
+       console.log(gallina.posX,gallina.posY);
         return 0;
      }else{
        return gallina.velocidad;
@@ -165,28 +161,28 @@ var actualizar = function () {
   */
      function controlGallina(x,y){//TODO colision lado pantalla
      if( x >= canvas.width || x <= canvas.width-canvas.width){
-       console.log("x aliada",gallinax);
-       gallinax=Math.abs((gallinax-canvas.width))+10;
-       console.log("x aliada",gallinax);
+       console.log("x aliada",gallina.posX);
+       gallina.posX=Math.abs((gallina.posX-canvas.width))+10;
+       console.log("x aliada",gallina.posX);
         }
      if( y >= canvas.height || y <= canvas.height-canvas.height){
-       console.log("y aliada",gallinax,gallinay);
-       gallinay=Math.abs(gallinay-canvas.height)+10;
-       console.log("y aliada",gallinax,gallinay);
+       console.log("y aliada",gallina.posX,gallina.posY);
+       gallina.posY=Math.abs(gallina.posY-canvas.height)+10;
+       console.log("y aliada",gallina.posX,gallina.posY);
      }
        return gallina.velocidad;
      
   }
      function controlGallinaEnemiga(x,y){//TODO colision lado pantalla
      if( x >= canvas.width || x <= canvas.width-canvas.width){
-       console.log("x enemiga",gallinaEnemigax);
-       gallinaEnemigax=Math.abs((gallinaEnemigax-canvas.width))+10;
-       console.log("x enemiga",gallinaEnemigax);
+       console.log("x enemiga",gallinaEnemiga.posX);
+       gallinaEnemiga.posX=Math.abs((gallinaEnemiga.posX-canvas.width))+10;
+       console.log("x enemiga",gallinaEnemiga.posX);
         }
      if( y >= canvas.height || y <= canvas.height-canvas.height){
-       console.log("y enemiga",gallinaEnemigax,gallinaEnemigay);
-       gallinaEnemigay=Math.abs(gallinaEnemigay-canvas.height)+10;
-       console.log("y enemiga",gallinaEnemigax,gallinaEnemigay);
+       console.log("y enemiga",gallinaEnemiga.posX,gallinaEnemiga.posY);
+       gallinaEnemiga.posY=Math.abs(gallinaEnemiga.posY-canvas.height)+10;
+       console.log("y enemiga",gallinaEnemiga.posX,gallinaEnemiga.posY);
      }
        return gallina.velocidad;
      
@@ -194,10 +190,10 @@ var actualizar = function () {
   
 	//colision
 	if (
-		personaje.posX  <= (gallinax + 20)
-		&& gallinax <= (personaje.posX  + 20)
-		&& personaje.posY <= (gallinay + 20)
-		&& gallinay <= (personaje.posY + 20)
+		personaje.posX  <= (gallina.posX + 20)
+		&& gallina.posX <= (personaje.posX  + 20)
+		&& personaje.posY <= (gallina.posY + 20)
+		&& gallina.posY <= (personaje.posY + 20)
 	) {
 		++personaje.contador;
     if(personaje.contador>getCookie("maximo")){
@@ -220,10 +216,10 @@ var actualizar = function () {
     personaje.vida--;
     muertePersonaje();
   }else if(
-		personaje.posX  <= (gallinaEnemigax + 20)
-		&& gallinaEnemigax <= (personaje.posX  + 20)
-		&& personaje.posY <= (gallinaEnemigay + 20)
-		&& gallinaEnemigay <= (personaje.posY + 20)
+		personaje.posX  <= (gallinaEnemiga.posX + 20)
+		&& gallinaEnemiga.posX <= (personaje.posX  + 20)
+		&& personaje.posY <= (gallinaEnemiga.posY + 20)
+		&& gallinaEnemiga.posY <= (personaje.posY + 20)
 	) {
     personaje.vida-=20;
     resetear();
@@ -237,10 +233,10 @@ var actualizar = function () {
 // pintar las gallinas
 var pintar = function () {
 	context.drawImage(imagenPersonaje, personaje.posX , personaje.posY);
-	context.drawImage(imagenGallina, gallinax, gallinay);
-  context.drawImage(imagenEnemigo, gallinaEnemigax, gallinaEnemigay);
-  context.drawImage(imagenGallina2, gallinaEnemigax, gallinaEnemigay);
-  //context.drawImage(imagenEnemigo, 0,30 * 30, 30, 30, gallinaEnemigax, gallinaEnemigay,1,1);
+	context.drawImage(imagenGallina, gallina.posX, gallina.posY);
+  context.drawImage(imagenEnemigo, gallinaEnemiga.posX, gallinaEnemiga.posY);
+  context.drawImage(imagenGallina2, gallinaEnemiga.posX, gallinaEnemiga.posY);
+  //context.drawImage(imagenEnemigo, 0,30 * 30, 30, 30, gallinaEnemiga.posX, gallinaEnemiga.posY,1,1);
 	// pmarcador de puntuacion
 	context.fillStyle = "rgba(8, 8, 141, 0.97)";
 	context.textAlign = "left";
