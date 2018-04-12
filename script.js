@@ -29,8 +29,7 @@ var imagenGallina = new Image();
 imagenGallina.src = "https://cdn.glitch.com/0c5fd143-6bda-4c72-915d-a4360fa2a11d%2Fgallina.png?1518914640653";
 var imagenEnemigo = new Image();
 imagenEnemigo.src = "https://cdn.glitch.com/b8bf82e1-f137-4611-894c-984f60112d89%2Fmala.png?1521024502826";
-var imagenGallina2 = new Image();
-imagenGallina2.src = "https://cdn.glitch.com/b8bf82e1-f137-4611-894c-984f60112d89%2Fmala2.png?1521028116785";
+
 
 //variables iniciales
 var vidaInicial = 100;
@@ -208,7 +207,6 @@ var pintar = function () {
     context.drawImage(imagenPersonaje, personaje.posX, personaje.posY);
     context.drawImage(imagenGallina, gallina.posX, gallina.posY);
     context.drawImage(imagenEnemigo, gallinaEnemiga.posX, gallinaEnemiga.posY);
-    context.drawImage(imagenGallina2, gallinaEnemiga.posX, gallinaEnemiga.posY);
     //context.drawImage(imagenEnemigo, 0,30 * 30, 30, 30, gallinaEnemiga.posX, gallinaEnemiga.posY,1,1);
     //marcador de puntuacion
     context.fillStyle = "rgba(8, 8, 141, 0.97)";
