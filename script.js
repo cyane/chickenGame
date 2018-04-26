@@ -99,6 +99,7 @@ var actualizar = function () {
     } else if (39 in keysDown) {
         personaje.posX += personaje.velocidad;
     }
+  console.log(personaje.posX, personaje.posY);
 
     //colision
     if (
