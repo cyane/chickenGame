@@ -4,12 +4,12 @@ function setCookie(cname, cvalue) {
 }
 
 function getCookie(cname) {
-    var ca = document.cookie;
+    let ca = document.cookie;
     return ca.substring(7, ca.length);
 }
 
 function checkCookie() {
-    var maximo = getCookie("maximo");
+    let maximo = getCookie("maximo");
     if (maximo != "" && maximo != null) {
         alert("welcome again, tu record es de: " + maximo);
     } else {
@@ -23,24 +23,28 @@ var canvas = document.getElementById("canvas");
 var context = canvas.getContext("2d");
 document.body.appendChild(canvas);
 
-var imagenPersonaje = new Image();
+var contadorGallinas = 0; //para añadir mas cuando llege a tal numero
+
+//letiables iniciales
+let vidaInicial = 100,
+    velocidadPersonajeInicial = 3,
+    velocidadGallina = 5,
+    imagenPersonaje = new Image(),
+    imagenGallina = new Image(),
+    imagenEnemigo = new Image();
+
 imagenPersonaje.src = "https://cdn.glitch.com/0c5fd143-6bda-4c72-915d-a4360fa2a11d%2FputoTOnto.png?1518914638385";
-var imagenGallina = new Image();
 imagenGallina.src = "https://cdn.glitch.com/0c5fd143-6bda-4c72-915d-a4360fa2a11d%2Fgallina.png?1518914640653";
-var imagenEnemigo = new Image();
 imagenEnemigo.src = "https://cdn.glitch.com/b8bf82e1-f137-4611-894c-984f60112d89%2Fmala.png?1521024502826";
 
 
-//variables iniciales
-var vidaInicial = 100;
-var velocidadPersonajeInicial = 3;
-var velocidadGallina = 5;
-
 //constructores
-function Gallina(velocidad, posX, posY) {
+function Gallina(velocidad, posX, posY, aliada, imagen) {
     this.velocidad = velocidad;
     this.posX = posX;
     this.posY = posY;
+    this.aliada = aliada;
+    this.imagen = imagen;
 }
 
 function Personaje(velocidad, posX, posY, vida, contador) {
@@ -49,15 +53,18 @@ function Personaje(velocidad, posX, posY, vida, contador) {
     this.posY = posY;
     this.contador = contador;
     this.vida = vida;
+    this.imagen = imagenPersonaje;
 }
 
 //objetos
-var personaje = new Personaje(velocidadPersonajeInicial, canvas.width - 100, canvas.height - 10, vidaInicial, 0);
-var gallina = new Gallina(velocidadGallina, Math.random() * (canvas.width - 35), Math.random() * (canvas.height - 35));
-var gallinaEnemiga = new Gallina(velocidadGallina, Math.random() * (canvas.width - 35), Math.random() * (canvas.height - 35));
+let personaje = new Personaje(velocidadPersonajeInicial, canvas.width - 100, canvas.height - 10, vidaInicial, 0),
+    gallinas = [];
+gallinas.push(new Gallina(velocidadGallina, Math.random() * (canvas.width - 35), Math.random() * (canvas.height - 35), true, imagenGallina));
+gallinas.push(new Gallina(velocidadGallina, Math.random() * (canvas.width - 35), Math.random() * (canvas.height - 35), false, imagenEnemigo));
+
 
 // control del personaje al puplsar y despulsar la tecla
-var keysDown = {};
+let keysDown = {};
 addEventListener("keydown", function (e) {
     keysDown[e.keyCode] = true;
 }, false);
@@ -67,16 +74,17 @@ addEventListener("keyup", function (e) {
 // poner cood pj en juego
 personaje.posX = canvas.width - 100;
 personaje.posY = canvas.height - 10;
-var resetear = function () {
+
+let resetear = function () {
     // poner random a la gallina por el mapa al morir
-    gallina.posX = Math.random() * (canvas.width - 35);
-    gallina.posY = Math.random() * (canvas.height - 35);
-    gallinaEnemiga.posX = Math.random() * (canvas.width - 35);
-    gallinaEnemiga.posY = Math.random() * (canvas.height - 35);
+    for (let i = 0; i < gallinas.length; i++) {
+        gallinas[i].posX = Math.random() * (canvas.width - 35);
+        gallinas[i].posY = Math.random() * (canvas.height - 35);
+    }
 };
 
 // movimiento
-var actualizar = function () {
+let actualizar = function () {
     canvas.style.width = window.innerWidth - 30 + "px";
     canvas.style.height = window.innerHeight - 30 + "px";
     if (38 in keysDown && (37 in keysDown || 39 in keysDown)) {
@@ -99,98 +107,70 @@ var actualizar = function () {
     } else if (39 in keysDown) {
         personaje.posX += personaje.velocidad;
     }
-  console.log(personaje.posX, personaje.posY);
+    for (let i = 0; i < gallinas.length; i++) {
+        colision(personaje, gallinas[i]);
 
-    //colision
-    if (
-        personaje.posX <= (gallina.posX + 20) &&
-        gallina.posX <= (personaje.posX + 20) &&
-        personaje.posY <= (gallina.posY + 20) &&
-        gallina.posY <= (personaje.posY + 20)
-    ) {
-        ++personaje.contador;
-        if (personaje.contador > getCookie("maximo")) {
-            setCookie("maximo", personaje.contador);
-            console.log("nuevo maximo personal de " + personaje.contador);
-            localStorage.setItem("maxG", personaje.contador);
+        //movimiento de las gallinas
+        if (Math.floor(6 * Math.random()) == 5) {
+            movimientoGallina(gallinas[i]);
         }
-        personaje.velocidad = personaje.velocidad + 0.125;
-        console.log("velocidad: " + personaje.velocidad);
-        console.log(localStorage.getItem("maxG"));
-        personaje.vida += 5;
-        if (personaje.vida > 100) {
-            personaje.vida = 100;
-        }
-        resetear();
-    } else if (personaje.posX >= canvas.width + 20 ||
-        personaje.posX <= canvas.width - canvas.width - 50 ||
-        personaje.posY >= canvas.height + 20 ||
-        personaje.posY <= canvas.height - canvas.height - 40) {
-        personaje.vida--;
-        muertePersonaje();
-    } else if (
-        personaje.posX <= (gallinaEnemiga.posX + 20) &&
-        gallinaEnemiga.posX <= (personaje.posX + 20) &&
-        personaje.posY <= (gallinaEnemiga.posY + 20) &&
-        gallinaEnemiga.posY <= (personaje.posY + 20)
-    ) {
-        personaje.vida -= 20;
-        resetear();
-        muertePersonaje();
     }
-    if (Math.floor(6 * Math.random()) == 5) {
-        movimientoGallina(gallina);
-        movimientoGallina(gallinaEnemiga);
-    }
+
 };
 
-function movimientoGallina(objetoGallina) {
+function colision(personaje, gallina) {
+    if (colisiona(gallina)) {
+        if (gallina.aliada) {
+            accionPillarAliada();
+        } else {
+            personaje.vida -= 20;
+            muertePersonaje();
+        }
+        resetear();
+    }
+    controlSer(personaje);
+
+}
+
+function movimientoGallina(gallina) {
     switch (Math.floor(5 * Math.random())) {
         case 1:
-           // if (objetoGallina.posX < personaje.posX + 30) {
-                objetoGallina.posX -= controlGallina(objetoGallina);
-           // }
+            gallina.posX -= controlSer(gallina);
             break;
         case 2:
-           // if (objetoGallina.posX > personaje.posX + 30) {
-                objetoGallina.posX += controlGallina(objetoGallina);
-          //  }
+            gallina.posX += controlSer(gallina);
             break;
         case 3:
-            //if (objetoGallina.posY < personaje.posY + 30) {
-                objetoGallina.posY -= controlGallina(objetoGallina);
-           // }
+            gallina.posY -= controlSer(gallina);
             break;
         case 4:
-          //  if (objetoGallina.posY > personaje.posY + 30) {
-                objetoGallina.posY += controlGallina(objetoGallina);
-         //   }
+            gallina.posY += controlSer(gallina);
             break;
         default:
             break;
     }
 }
-
-function controlGallina(objetoGallina) { //TODO colision lado pantalla
-    let x = objetoGallina.posX;
-    let y = objetoGallina.posY;
+//controla la salida por un lado de la pantalla de cualquier ser
+function controlSer(ser) {
+    let x = ser.posX,
+        y = ser.posY;
     if (x >= canvas.width) {
-        objetoGallina.posX = Math.abs((objetoGallina.posX - canvas.width)) + 20;
+        ser.posX = Math.abs((ser.posX - canvas.width)) + 0;
     }
-    if (x <= canvas.width - canvas.width){
-        objetoGallina.posX = Math.abs((objetoGallina.posX - canvas.width)) - 20;
+    if (x <= canvas.width - canvas.width) {
+        ser.posX = Math.abs((ser.posX - canvas.width)) - 20;
     }
     if (y >= canvas.height) {
-        objetoGallina.posY = Math.abs(objetoGallina.posY - canvas.height) + 20;
+        ser.posY = Math.abs(ser.posY - canvas.height) + 0;
     }
-    if(y <= canvas.height - canvas.height){
-        objetoGallina.posY = Math.abs(objetoGallina.posY - canvas.height) - 20;
+    if (y <= canvas.height - canvas.height) {
+        ser.posY = Math.abs(ser.posY - canvas.height) - 20;
     }
-    return objetoGallina.velocidad;
+    return ser.velocidad;
 }
 
 //funcion para cuando el personaje muere
-var muertePersonaje = function () {
+let muertePersonaje = function () {
     if (personaje.vida <= 0) {
         personaje.vida = 100;
         personaje.velocidad = 3;
@@ -200,14 +180,47 @@ var muertePersonaje = function () {
         alert("has muerto");
         document.location.href = document.location.href;
     }
+};
+
+let colisiona = function (gallina) {
+    return (personaje.posX <= (gallina.posX + 20) && gallina.posX <= (personaje.posX + 20) && personaje.posY <= (gallina.posY + 20) && gallina.posY <= (personaje.posY + 20));
+
+};
+
+
+let accionPillarAliada = function () {
+    ++personaje.contador;
+    if (personaje.contador > getCookie("maximo")) {
+        setCookie("maximo", personaje.contador);
+        console.log("nuevo maximo personal de " + personaje.contador);
+        localStorage.setItem("maxG", personaje.contador);
+    }
+    contadorGallinas++;
+    if (contadorGallinas % 5 === 0) {
+        if (Math.round(Math.random())) {
+            let gallinaAdd = new Gallina(velocidadGallina, Math.random() * (canvas.width - 35), Math.random() * (canvas.height - 35), true, imagenGallina);
+            gallinas.push(gallinaAdd);
+        } else {
+            let gallinaAdd = new Gallina(velocidadGallina, Math.random() * (canvas.width - 35), Math.random() * (canvas.height - 35), false, imagenEnemigo);
+            gallinas.push(gallinaAdd);
+        }
+    }
+    personaje.velocidad = personaje.velocidad + 0.125;
+    console.log("velocidad: " + personaje.velocidad);
+    console.log(localStorage.getItem("maxG"));
+    personaje.vida += 5;
+    if (personaje.vida > 100) {
+        personaje.vida = 100;
+    }
 }
 
 
-// pintar las gallinas
-var pintar = function () {
-    context.drawImage(imagenPersonaje, personaje.posX, personaje.posY);
-    context.drawImage(imagenGallina, gallina.posX, gallina.posY);
-    context.drawImage(imagenEnemigo, gallinaEnemiga.posX, gallinaEnemiga.posY);
+// pintar las gallinas y el muñeco
+let pintar = function () {
+    context.drawImage(personaje.imagen, personaje.posX, personaje.posY);
+    for (let i = 0; i < gallinas.length; i++) {
+        context.drawImage(gallinas[i].imagen, gallinas[i].posX, gallinas[i].posY);
+    }
     //context.drawImage(imagenEnemigo, 0,30 * 30, 30, 30, gallinaEnemiga.posX, gallinaEnemiga.posY,1,1);
     //marcador de puntuacion
     context.fillStyle = "rgba(8, 8, 141, 0.97)";
@@ -218,9 +231,9 @@ var pintar = function () {
     context.fillText("Gallinas Atrapadas: " + personaje.contador + " | velocidad " + speed + " | personal: " + getCookie("maximo") + " vida:" + personaje.vida /*+ " global: " + localStorage.getItem("maxG")*/ , canvas.width - canvas.width + 1, 0);
 };
 var micanvas, context;
-var tiempo = 0;
-var stop;
-var fondo = new Image();
+let tiempo = 0;
+let stop;
+let fondo = new Image();
 fondo.src = 'https://cdn.glitch.com/e9545343-6e64-41a2-9975-7af28d904caa%2Fbeetlegrassedit.png?1518971333016';
 window.addEventListener('load', init);
 
@@ -252,7 +265,7 @@ function dibujar(context) {
     }
 }
 
-var principal = function () {
+let principal = function () {
     actualizar(1 / 1000);
     pintar();
     //solicita que el navegador programe el repintado de la ventana para el próximo ciclo de animación          
